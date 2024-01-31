@@ -1,9 +1,20 @@
-import { Pet } from './pet-model.js';
+import * as petRepository from './pet-repository.js'
 
-export async function getAllPets() {
-
+const getAllPets = async () => {
+  const pet = await petRepository.fetchAllPets();
+  if (pet.length === 0) {
+    throw {
+      message: 'No Pets Found'
+    }
+  }
+  return pet;
 }
 
-export async function addPet(payload) {
+const addPet = async (payload) => {
+  return await petRepository.addPet(payload);
+}
 
+export {
+  addPet,
+  getAllPets,
 }
