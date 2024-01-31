@@ -1,7 +1,8 @@
 import express from 'express'
 import config from './config.js';
-import { USER } from './user/index.js'
+import { userRouter } from './user/index.js'
 import { PET } from './pet/index.js';
+import db from './lib/db.js'
 
 const app = express();
 
@@ -10,10 +11,11 @@ const port = config.port;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/user', USER);
+app.use('/user', userRouter);
 
 app.use('/pet', PET);
 
 app.listen(port, () => {
+  db();
   console.log(`Server has started at http://localhost:${port}`)
 })

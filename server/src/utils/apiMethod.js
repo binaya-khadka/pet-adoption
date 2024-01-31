@@ -18,6 +18,7 @@ const apiFail = ({ req, res, error, message = 'Error Occured',
     success: false,
   },
 }) => {
+  console.log(error);
   return res.status(status.code || 400).json({
     message,
     status: {

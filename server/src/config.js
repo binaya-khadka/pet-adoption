@@ -7,4 +7,4 @@ const config = {
   databaseUrl: process.env.MONGO_URI
 }
 
-export default config
+export default config                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
