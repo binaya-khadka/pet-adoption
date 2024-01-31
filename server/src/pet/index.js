@@ -1,1 +1,3 @@
-export { Pet, pet } from "./pet-schema.js";
+export * as Pet from './pet-queries.js'
+
+export { router as PET } from './pet-routes.js'

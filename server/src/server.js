@@ -1,46 +1,19 @@
 import express from 'express'
 import config from './config.js';
+import { USER } from './user/index.js'
+import { PET } from './pet/index.js';
 
-import { User } from './user/index.js';
+const app = express();
 
-import db from './lib/db.js'
-
-const app = express()
+const port = config.port;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/users', async (req, res) => {
-  try {
-    db();
-    const users = await User.getAllUsers();
-    res.send({ message: "users fetched successfully", data: users })
-  } catch (error) {
-    res.send({
-      message: "Something unexpected happen", status: {
-        success: false,
-        code: 400
-      },
-      error: error
-    })
-  }
-})
+app.use('/user', USER);
 
-app.post('/users', async (req, res) => {
-  try {
-    db();
-    const user = await User.createUser(req?.body);
-    res.send({ message: "User has been created successfully", data: user })
-  } catch (error) {
-    console.log(error)
-    res.send({
-      message: "Something unexpected happen", status: {
-        success: false,
-        code: 404
-      }
-    })
-  }
-})
+app.use('/pet', PET);
 
-app.listen(config.port, () => {
-  console.log(`Server listening on port ${config.port}`)
+app.listen(port, () => {
+  console.log(`Server has started at http://localhost:${port}`)
 })

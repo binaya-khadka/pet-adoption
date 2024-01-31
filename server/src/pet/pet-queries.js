@@ -1,26 +1,16 @@
-// import { Pet } from "./pet-schema"
+import { Pet } from './pet-model.js'
 
-// const addNewPet = async (paylaod) => {
-//   try {
-//     const pet = await Pet.create(payload);
-//     return pet;
-//   } catch (error) {
-//     console.log(error)
-//     return error
-//   }
-// }
+const addPet = async (payload) => {
+  const pet = await Pet.create(payload);
+  return pet;
+}
 
-// const getAllPets = async () => {
-//   try {
-//     const pets = await Pet.find();
-//     console.log(pets)
-//   } catch (error) {
-//     console.log(error)
-//     return error
-//   }
-// }
+const getAllPets = async () => {
+  const pet = await Pet.find({});
+  return pet;
+}
 
-// export {
-//   addNewPet,
-//   getAllPets
-// }
+export {
+  addPet,
+  getAllPets,
+}
