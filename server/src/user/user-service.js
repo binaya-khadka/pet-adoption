@@ -8,9 +8,16 @@ export async function getAllUser() {
 
 export async function register(payload) {
   const user = await userRepository.createUser(payload);
+
+  const userdata = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  }
+
   const token = jwtUtils.generateToken(user._id);
 
-  return { user, token };
+  return { user: userdata, token };
 }
 
 export async function login({ email, password }) {
@@ -27,6 +34,11 @@ export async function login({ email, password }) {
   }
 
   const token = jwtUtils.generateToken(user._id);
+  const userData = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  }
 
-  return { user, token };
+  return { user: userData, token };
 }

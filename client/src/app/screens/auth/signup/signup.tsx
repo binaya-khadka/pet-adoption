@@ -25,7 +25,6 @@ export const Signup = () => {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: userService.signUpUser,
     onSuccess: ({ data: { token, ...currentUser } }) => {
-      console.log(token, currentUser);
       localStorageUtils.setItem('token', token)
       localStorageUtils.setItem('user', currentUser)
       navigate('/')

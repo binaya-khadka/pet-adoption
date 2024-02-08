@@ -1,5 +1,5 @@
 import { MutationFunction } from "react-query";
-import { User, ISignup } from "../../interfaces";
+import { User, ISignup, ILogin } from "../../interfaces";
 import { API } from "../lib";
 
 const signUpUser: MutationFunction<{
@@ -9,4 +9,11 @@ const signUpUser: MutationFunction<{
   return await API.post('/user', data)
 }
 
-export { signUpUser }
+const loginUser: MutationFunction<{
+  message: string;
+  data: User & { token: string }
+}, ILogin> = async data => {
+  return await API.post('/user/login', data)
+}
+
+export { signUpUser, loginUser }
