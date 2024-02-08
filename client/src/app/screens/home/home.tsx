@@ -1,9 +1,14 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
+import { Nav } from '../../components'
 
+import * as styles from './home.styles'
 export const Home: FC = () => {
   return (
-    <div>
-      <h1>Homepage</h1>
-    </div>
+    <>
+      <Nav />
+      <div style={{...styles.container}}>
+        
+      </div>
+    </>
   )
 }
