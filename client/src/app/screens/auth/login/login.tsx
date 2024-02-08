@@ -3,10 +3,16 @@ import { useForm, Controller } from 'react-hook-form'
 import { userValidationSchema } from "../../../../validationSchemas"
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from "react-query"
+import { userService } from "../../../services"
+import { localStorageUtils } from "../../../utils"
+import { useNavigate } from "react-router-dom"
 
 type ILoginDTO = z.infer<typeof userValidationSchema.login>;
 
 export const Login = () => {
+
+  const navigate = useNavigate();
 
   const { control, handleSubmit, formState: { errors } } = useForm<ILoginDTO>({
     defaultValues: {
@@ -16,8 +22,18 @@ export const Login = () => {
     resolver: zodResolver(userValidationSchema.login)
   })
 
+  const { mutate: login, isLoading } = useMutation({
+    mutationFn: userService.loginUser,
+    onSuccess: ({ data: { token, ...currentUser } }) => {
+      localStorageUtils.setItem('token', token)
+      localStorageUtils.setItem('user', currentUser)
+      navigate('/')
+    }
+
+  })
+
   const onSubmit = ({ email, password }: { email: string, password: string }) => {
-    console.log({ email, password })
+    login({ email, password })
   }
 
   return (
@@ -44,7 +60,7 @@ export const Login = () => {
             <div style={{ color: 'tomato' }}>{errors?.password?.message}</div>
           </div>
           <div>
-            <input type="submit" value="Submit" />
+            <input type={isLoading ? "button" : "submit"} value={isLoading ? "Logging In" : "Login"} />
           </div>
         </form>
       </div>
