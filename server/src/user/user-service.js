@@ -1,5 +1,6 @@
 import * as userRepository from './user-repository.js'
 import bcrypt from 'bcryptjs'
+import { jwtUtils } from '../utils/index.js';
 
 export async function getAllUser() {
   return await userRepository.fetchAllUser({});
@@ -22,7 +23,9 @@ export async function login({ email, password }) {
     }
   }
 
-  return user;
+  const token = jwtUtils.generateToken(user._id);
+
+  return { user, token };
 }
 
 // export async function register(name, email, password) {

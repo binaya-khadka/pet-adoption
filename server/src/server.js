@@ -6,7 +6,7 @@ import db from './lib/db.js'
 
 const app = express();
 
-const port = config.port;
+const port = config?.port;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -1,9 +1,11 @@
 import express from 'express'
 import * as userHandler from './user-handler.js'
+import { verifyToken } from '../middleware/authMiddleware.js'
 
 const router = express.Router();
 
-router.get('/', userHandler.getAllUserHandler)
+router.get('/', verifyToken, userHandler.getAllUserHandler)
+
 router.post('/', userHandler.createUserHandler)
 
 router.post('/login', userHandler.loginHandler);

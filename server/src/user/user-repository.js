@@ -8,6 +8,10 @@ const fetchUserByEmail = async (email) => {
   return await User.findOne({ email: email })
 }
 
+const fetchUserById = async (id) => {
+  return await User.findById(id);
+}
+
 const createUser = async (payload) => {
   return await User.create(payload);
 }
@@ -27,4 +31,5 @@ export {
   createUser,
   updateUser,
   deleteUser,
+  fetchUserById
 }
