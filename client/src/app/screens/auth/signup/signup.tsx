@@ -5,10 +5,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { userValidationSchema } from '../../../../validationSchemas'
 import { useMutation } from 'react-query'
 import { userService } from '../../../services'
+import { localStorageUtils } from '../../../utils'
+import { useNavigate } from 'react-router-dom'
 
 type ISignupDTO = z.infer<typeof userValidationSchema.signup>;
 
 export const Signup = () => {
+
+  const navigate = useNavigate();
 
   const { control, handleSubmit, formState: { errors } } = useForm<ISignupDTO>({
     defaultValues: {
@@ -20,8 +24,11 @@ export const Signup = () => {
 
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: userService.signUpUser,
-    onSuccess: () => {
-      alert("Successfully Created Account")
+    onSuccess: ({ data: { token, ...currentUser } }) => {
+      console.log(token, currentUser);
+      localStorageUtils.setItem('token', token)
+      localStorageUtils.setItem('user', currentUser)
+      navigate('/')
     }
   })
 
