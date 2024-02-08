@@ -3,8 +3,10 @@ import config from './config.js';
 import { userRouter } from './user/index.js'
 import { petRouter } from './pet/index.js';
 import db from './lib/db.js'
+import cors from 'cors'
 
 const app = express();
+app.use(cors());
 
 const port = config?.port;
 

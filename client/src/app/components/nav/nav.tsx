@@ -36,8 +36,8 @@ export const Nav = () => {
         <div style={{ ...styles.navLinks, display: isMobile ? 'none' : 'flex' }}>
           <a href="" style={styles.navLink} >Home</a>
           <a href="" style={styles.navLink}>About</a>
-          <a href="" style={styles.navLink}>Login</a>
-          <a href="" style={styles.navLink}>Signup</a>
+          <a href="/login" style={styles.navLink}>Login</a>
+          <a href="/signup" style={styles.navLink}>Signup</a>
         </div>
       </div>
       <div style={{ ...styles.navLinks, display: showMenu ? 'grid' : 'none' }}>

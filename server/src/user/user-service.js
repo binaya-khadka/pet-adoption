@@ -7,7 +7,10 @@ export async function getAllUser() {
 }
 
 export async function register(payload) {
-  return await userRepository.createUser(payload);
+  const user = await userRepository.createUser(payload);
+  const token = jwtUtils.generateToken(user._id);
+
+  return { user, token };
 }
 
 export async function login({ email, password }) {

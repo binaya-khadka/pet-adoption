@@ -1,8 +1,10 @@
-import * as z from 'zod'
+import { z } from 'zod'
 import { Nav } from "../../../components"
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userValidationSchema } from '../../../../validationSchemas'
+import { useMutation } from 'react-query'
+import { userService } from '../../../services'
 
 type ISignupDTO = z.infer<typeof userValidationSchema.signup>;
 
@@ -16,12 +18,15 @@ export const Signup = () => {
     resolver: zodResolver(userValidationSchema.signup)
   })
 
+  const { mutate: signup, isLoading } = useMutation({
+    mutationFn: userService.signUpUser,
+    onSuccess: () => {
+      alert("Successfully Created Account")
+    }
+  })
+
   const onSubmit = ({ name, email, password }: { name: string, email: string, password: string }) => {
-    console.log({
-      name,
-      email,
-      password
-    })
+    signup({ name, email, password })
   }
 
   return (
@@ -37,7 +42,7 @@ export const Signup = () => {
               defaultValue=""
               render={({ field }) => <input {...field} />}
             />
-            <div style={{color: 'tomato'}}>{errors?.name?.message}</div>
+            <div style={{ color: 'tomato' }}>{errors?.name?.message}</div>
           </div>
           <div>
             <div>Email</div>
@@ -46,7 +51,7 @@ export const Signup = () => {
               control={control}
               render={({ field }) => <input {...field} />}
             />
-            <div style={{color: 'tomato'}}>{errors?.email?.message}</div>
+            <div style={{ color: 'tomato' }}>{errors?.email?.message}</div>
           </div>
           <div>
             <div>Password</div>
@@ -55,10 +60,10 @@ export const Signup = () => {
               control={control}
               render={({ field }) => <input type="password" {...field} />}
             />
-            <div style={{color: 'tomato'}}>{errors?.password?.message}</div>
+            <div style={{ color: 'tomato' }}>{errors?.password?.message}</div>
           </div>
           <div>
-            <input type="submit" value="Submit" />
+            <input type={isLoading ? "button" : "submit"} value={isLoading ? "Submitting" : "Submit"} />
           </div>
         </form>
       </div>

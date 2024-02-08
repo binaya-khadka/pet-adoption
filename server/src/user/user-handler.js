@@ -17,8 +17,10 @@ const createUserHandler = async (req, res) => {
 
   try {
     const user = await userService.register(payload);
+    
     return apiMethodUtils.apiSuccess({ req, res, data: user, message: 'Successfully created user' })
   } catch (err) {
+    console.log(err)
     return apiMethodUtils.apiFail({ req, res, error: err, message: 'Something went wrong' })
   }
 }
@@ -28,7 +30,7 @@ const loginHandler = async (req, res) => {
 
   try {
     const user = await userService.login({ email, password });
-    console.log(user);
+    
     return apiMethodUtils.apiSuccess({ req, res, data: user, message: 'Successfully logged in' })
   } catch (err) {
     console.log(err)
