@@ -27,8 +27,3 @@ export async function login({ email, password }) {
 
   return { user, token };
 }
-
-// export async function register(name, email, password) {
-//   const payload = { name, email, password }
-//   return await userRepository.createUser(payload);
-// }

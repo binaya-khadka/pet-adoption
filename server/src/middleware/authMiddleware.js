@@ -11,7 +11,7 @@ const verifyToken = async (req, res, next) => {
   try {
 
     const decodedData = jwt.verify(token, config?.jwtSecret);
-    // decodedData will return exp, id(the user id), iat
+    // jwt.verify will return exp, id(the user id), iat
 
     const user = await userRepository.fetchUserById(decodedData.id);
 
