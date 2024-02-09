@@ -4,6 +4,8 @@ import { Home, Signup, Login } from './app/screens'
 import { QueryClientProvider, QueryClient } from 'react-query'
 
 
+import { AddPet } from './app/screens/pet/Add'
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/addpet',
+    element: <AddPet />
   }
 ])
 
