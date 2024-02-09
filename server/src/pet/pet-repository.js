@@ -9,12 +9,31 @@ const addPet = async (payload) => {
 }
 
 const updatePet = async (payload) => {
-  const { id, name, age, breed, onAdoptionByUser } = payload;
-  return await Pet.findByIdAndUpdate(id, { name, age, breed, onAdoptionByUser, isAdopted, adoptedByUser }, { new: true });
+  const { id, name, age, breed } = payload;
+  return await Pet.findByIdAndUpdate(id, { name, age, breed }, { new: true });
+}
+
+const petAdoption = async payload => {
+  const { id, adoptedByUser } = payload;
+  const pet = await Pet.findById(id);
+  pet.adoptedByUser = adoptedByUser;
+  pet.isAdopted = true;
+  return await pet.save();
+}
+
+const deletePet = async (id) => {
+  return await Pet.findByIdAndDelete(id);
+}
+
+const getPet = async (id) => {
+  return await Pet.findById(id);
 }
 
 export {
   fetchAllPets,
   addPet,
   updatePet,
+  deletePet,
+  petAdoption,
+  getPet
 }
