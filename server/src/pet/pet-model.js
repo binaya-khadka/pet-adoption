@@ -5,6 +5,9 @@ const pet = new mongoose.Schema({
     type: String,
     require: true
   },
+  images: {
+    type: Array,
+  },
   age: {
     type: String,
     require: true

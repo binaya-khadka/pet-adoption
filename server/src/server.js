@@ -12,6 +12,7 @@ const port = config?.port;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'))
 
 app.use('/user', userRouter);
 app.use('/pet', petRouter);
