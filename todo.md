@@ -1,7 +1,8 @@
-[ ] Create beautiful interface for user login and register
-[ ] Creating Form for adding pets by authorized users
+[ ] Frotend
 [ ] Create Homepage
+[ ] Create beautiful interface for user login and register
 [ ] Create page for single pet
+[ ] Creating Form for adding pets by authorized users
 [x] Creating form for adding new pet
 [x] API Fetching for all the pets info - react query
 [ ] Storing multiple images in Pets Section
@@ -9,7 +10,12 @@
   [ ] Add this to add pet section
 [ ] Admin Panel
 [ ] 
+[ ] Backend
 [ ] 
+[ ] Database
+[ ] 
+[ ] 
+[ ] Deployment
 [ ] 
 [ ] 
 [ ] 

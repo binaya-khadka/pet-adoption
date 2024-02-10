@@ -1,2 +1,2 @@
-export { Home } from './home/home'
+export { default as Home } from './home/Home'
 export * from './auth'

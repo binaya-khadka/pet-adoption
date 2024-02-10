@@ -1,19 +1,15 @@
+import Layout from "../Layout/Layout";
 import * as styles from './home.styles'
-import { FC } from 'react'
-import { Nav } from '../../components'
 import { useQuery } from 'react-query'
 import { petService } from '../../services'
 import styled from 'styled-components'
 
-export const Home: FC = () => {
-
+export default function Home() {
   const { data, isLoading, isError } = useQuery('home', petService.getAllPets);
 
   console.log(data?.data)
-
   return (
-    <>
-      <Nav />
+    <Layout>
       <div style={{ ...styles.container }}>
         <div>
           <H1>
@@ -48,7 +44,7 @@ export const Home: FC = () => {
           )}
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

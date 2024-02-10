@@ -9,7 +9,7 @@ router.get('/', petHandler.fetchPets)
 router.post('/', verifyToken , petHandler.addPetHandler);
 
 // Route for updating a pet
-router.put('/update/:id', verifyToken, petHandler.updatePetHandler);
+// router.put('/update/:id', verifyToken, petHandler.updatePetHandler);
 
 // Route for deleting a pet
 // router.delete('/:id', verifyToken, petHandler.deletePetHandler)

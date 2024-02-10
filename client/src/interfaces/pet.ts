@@ -6,6 +6,7 @@ interface Pet {
   isAdopted: boolean;
   onAdoptionByUser: string;
   adoptedByUser: string;
+  images: string[];
 }
 
 export type {

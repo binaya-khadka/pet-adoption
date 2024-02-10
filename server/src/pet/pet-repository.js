@@ -29,11 +29,16 @@ const getPet = async (id) => {
   return await Pet.findById(id);
 }
 
+async function getPetByUser(userId) {
+  return await Pet.find({ onAdoptionByUser: userId});
+}
+
 export {
   fetchAllPets,
   addPet,
   updatePet,
   deletePet,
   petAdoption,
-  getPet
+  getPet,
+  getPetByUser
 }

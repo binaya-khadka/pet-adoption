@@ -7,8 +7,6 @@ const addPetHandler = async (req, res) => {
 
   try {
     if (req?.file !== undefined) {
-
-
       upload.array("images", 5)(req, res, async function (err) {
         if (err) {
           return apiMethodUtils.apiFail({ req, res, error: err, message: 'Something went wrong' });

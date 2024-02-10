@@ -5,14 +5,27 @@ import { localStorageUtils } from '../../utils'
 import { useMutation } from 'react-query'
 import { petService } from '../../services'
 
+import Layout from '../Layout/Layout'
+
 export const AddPet = () => {
 
   const { control, handleSubmit } = useForm<Pet>()
 
-  const onSubmit = ({ name, age, breed }: { name: string, age: string, breed: string }) => {
+  const onSubmit = ({
+    name,
+    age,
+    breed,
+    images
+  }: {
+    name: string,
+    age: string,
+    breed: string,
+    images: string
+  }) => {
     const user = localStorageUtils.getItem('user') as { user: User };
     const onAdoptionByUser = user?.user?.id;
-    addPet({ name, age, breed, onAdoptionByUser })
+    console.log({ name, age, breed, onAdoptionByUser, images })
+    addPet({ name, age, breed, onAdoptionByUser, images })
   }
 
 
@@ -25,11 +38,10 @@ export const AddPet = () => {
 
 
   return (
-    <>
+    <Layout>
       <div>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
-
             <div>
               <div>Name</div>
               <Controller
@@ -60,12 +72,21 @@ export const AddPet = () => {
               />
             </div>
 
+            <div>
+              <div>Image:</div>
+              <Controller
+                name='images'
+                control={control}
+                render={({ field }) => <input {...field} type='file' />}
+              />
+
+            </div>
+
             <input type={isLoading ? "button" : "submit"} value={isLoading ? "Adding" : "Add Pet"} />
 
           </form>
         </div>
       </div>
-
-    </>
+    </Layout>
   )
 }
