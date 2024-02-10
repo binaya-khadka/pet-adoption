@@ -1,4 +1,4 @@
-import { Nav } from "../../../components"
+import Layout from "../../Layout/Layout"
 import { useForm, Controller } from 'react-hook-form'
 import { userValidationSchema } from "../../../../validationSchemas"
 import { z } from 'zod'
@@ -7,11 +7,11 @@ import { useMutation } from "react-query"
 import { userService } from "../../../services"
 import { localStorageUtils } from "../../../utils"
 import { useNavigate } from "react-router-dom"
+import "./login.css"
 
 type ILoginDTO = z.infer<typeof userValidationSchema.login>;
 
-export const Login = () => {
-
+export default function Login() {
   const navigate = useNavigate();
 
   const { control, handleSubmit, formState: { errors } } = useForm<ILoginDTO>({
@@ -35,35 +35,35 @@ export const Login = () => {
   const onSubmit = ({ email, password }: { email: string, password: string }) => {
     login({ email, password })
   }
-
   return (
-    <>
-      <Nav />
+    <Layout>
       <div style={{ maxWidth: 1200, margin: 'auto' }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <div>Email</div>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => <input {...field} />}
-            />
-            <div style={{ color: 'tomato' }}>{errors?.email?.message}</div>
-          </div>
-          <div>
-            <div>Password</div>
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => <input type="password" {...field} />}
-            />
-            <div style={{ color: 'tomato' }}>{errors?.password?.message}</div>
-          </div>
-          <div>
-            <input type={isLoading ? "button" : "submit"} value={isLoading ? "Logging In" : "Login"} />
-          </div>
-        </form>
+        <div className="formContainer">
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <div className="labelText">Email</div>
+              <Controller
+                name="email"
+                control={control}
+                render={({ field }) => <input className="textField" {...field} />}
+              />
+              <div style={{ color: 'tomato' }}>{errors?.email?.message}</div>
+            </div>
+            <div>
+              <div className="labelText">Password</div>
+              <Controller
+                name="password"
+                control={control}
+                render={({ field }) => <input className="textField" type="password" {...field} />}
+              />
+              <div style={{ color: 'tomato' }}>{errors?.password?.message}</div>
+            </div>
+            <div>
+              <input className="button" type={isLoading ? "button" : "submit"} value={isLoading ? "Logging In" : "Login"} />
+            </div>
+          </form>
+        </div>
       </div>
-    </>
+    </Layout>
   )
 }

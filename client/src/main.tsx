@@ -1,6 +1,6 @@
 import './index.css'
 import ReactDOM from 'react-dom/client'
-import { Home, Signup, Login } from './app/screens'
+import { Home, Signup, Login, About } from './app/screens'
 import { QueryClientProvider, QueryClient } from 'react-query'
 
 
@@ -23,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/about',
+    element: <About />
   },
   {
     path: '/addpet',

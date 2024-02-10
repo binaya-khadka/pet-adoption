@@ -1,7 +1,7 @@
 import { pageContainer } from "../../../preset-styles"
 
 const nav = {
-  backgroundColor: '#dadada',
+  backgroundColor: '#d1e0e0',
 }
 
 const inner = {
@@ -10,14 +10,14 @@ const inner = {
   display: 'grid',
   gridTemplateColumns: '1fr auto',
   alignItems: 'center',
-  // justifyContent: 'center',
+  fontSize: 18
 }
 
 const navLinks = {
   display: 'flex',
   justifyContent: 'center',
   padding: '8px 10px',
-  gap: 10
+  gap: '20px'
 }
 
 const navLink = {
@@ -25,9 +25,22 @@ const navLink = {
   color: '#121212',
 }
 
+const logoContainer = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 10,
+}
+
+export const logoTitle = {
+  textDecoration: 'none',
+  fontWeight: 600,
+  color: '#121212'
+}
+
 export {
   nav,
   inner,
   navLinks,
-  navLink
+  navLink,
+  logoContainer
 }
