@@ -5,3 +5,56 @@ html,
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.hero {
+  /* background: #fcecdd; */
+  margin-bottom: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.section {
+  margin-bottom: 100px;
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.section-content {
+
+}
+
+.hero-content {
+
+}
+
+.hero-title {
+  background-image: linear-gradient(60deg, #d1e0e0, #ffb03a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent
+}
+
+.hero-subtitle {
+  text-align: center;
+  font-size: 1.255rem;
+  line-height: 2rem;
+  max-width: 1000px;
+  margin: auto auto 30px;
+  font-weight: 400;
+}
+
+.hero-download {
+  display: grid;
+  grid-auto-columns: max-content;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.hero-image {
+  display: block;
+  margin: 0 auto;
+}
