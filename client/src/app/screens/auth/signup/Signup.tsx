@@ -7,6 +7,7 @@ import { useMutation } from 'react-query'
 import { userService } from '../../../services'
 import { localStorageUtils } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
+import { storageConstants } from "../../../../constants"
 
 type ISignupDTO = z.infer<typeof userValidationSchema.signup>;
 
@@ -24,8 +25,8 @@ export default function Signup() {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: userService.signUpUser,
     onSuccess: ({ data: { token, ...currentUser } }) => {
-      localStorageUtils.setItem('token', token)
-      localStorageUtils.setItem('user', currentUser)
+      localStorageUtils.setItem(storageConstants.sessionKey, token)
+      localStorageUtils.setItem(storageConstants.localUserKey, JSON.stringify(currentUser))
       navigate('/')
     }
   })

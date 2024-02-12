@@ -1,13 +1,15 @@
+import "./login.css"
 import Layout from "../../Layout/Layout"
+import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { userValidationSchema } from "../../../../validationSchemas"
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from "react-query"
 import { userService } from "../../../services"
 import { localStorageUtils } from "../../../utils"
 import { useNavigate } from "react-router-dom"
-import "./login.css"
+import { storageConstants } from "../../../../constants"
+import { ErrorResponse } from "../../../../interfaces"
 
 type ILoginDTO = z.infer<typeof userValidationSchema.login>;
 
@@ -25,9 +27,13 @@ export default function Login() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: userService.loginUser,
     onSuccess: ({ data: { token, ...currentUser } }) => {
-      localStorageUtils.setItem('token', token)
-      localStorageUtils.setItem('user', currentUser)
+      localStorageUtils.setItem(storageConstants.sessionKey, token)
+      localStorageUtils.setItem(storageConstants.localUserKey, JSON.stringify(currentUser))
       navigate('/')
+    },
+    onError: (error: ErrorResponse) => {
+      console.log(error?.error?.message)
+      alert(error?.error.message)
     }
 
   })

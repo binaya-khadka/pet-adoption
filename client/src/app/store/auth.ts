@@ -1,6 +1,8 @@
+import { storageConstants } from "../../constants";
 import { getItemFromLocalStorage } from "../lib/localStorage";
 
-
-export default function getCurrentUser() {
-  return JSON.parse(getItemFromLocalStorage(user) || "{}")
+const getCurrentUser = () => {
+  return JSON.parse(getItemFromLocalStorage(storageConstants.localUserKey) || '{}')
 }
+
+export { getCurrentUser }
