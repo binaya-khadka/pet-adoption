@@ -5,9 +5,9 @@ import { petService } from '../../services'
 import styled from 'styled-components'
 
 export default function Home() {
+  
   const { data, isLoading, isError } = useQuery('home', petService.getAllPets);
 
-  console.log(data?.data)
   return (
     <Layout>
       <div style={{ ...styles.container }}>
@@ -28,6 +28,12 @@ export default function Home() {
               <PetContainer>
                 {data?.data?.map(pet => (
                   <Pet key={pet.id}>
+                    <div style={{height: 200, width: 200}}>
+                      <img style={{
+                        height: 200,
+                        width: '100%'
+                      }} src={`http://localhost:3000/uploads/${pet.image}`} alt={pet.name} />
+                    </div>
                     <div>
                       {pet.name}
                     </div>

@@ -1,33 +1,12 @@
 import { apiMethodUtils } from "../utils/index.js"
-import { upload } from '../utils/index.js';
 import * as petRepository from './pet-repository.js'
 
-
 const addPetHandler = async (req, res) => {
-
   try {
-    if (req?.file !== undefined) {
-      upload.array("images", 5)(req, res, async function (err) {
-        if (err) {
-          return apiMethodUtils.apiFail({ req, res, error: err, message: 'Something went wrong' });
-        }
-        // No errors occurred during upload.
-        const { name, age, breed, onAdoptionByUser } = req.body;
-        const images = req.files.map(file => file.filename);
-        const payload = { name, age, breed, onAdoptionByUser, images };
-
-        if (req.files.length > 5) {
-          return apiMethodUtils.apiFail({ req, res, message: 'Sorry the upload limit is 5' });
-        }
-
-        const pet = await petRepository.addPet(payload);
-        return apiMethodUtils.apiSuccess({ req, res, data: pet, message: 'Added New Pet' });
-      });
-    }
-
     const { name, age, breed, onAdoptionByUser } = req.body;
-    const payload = { name, age, breed, onAdoptionByUser };
+    const image = req.file.filename;
 
+    const payload = { name, age, breed, onAdoptionByUser, image: image };
     const pet = await petRepository.addPet(payload);
     return apiMethodUtils.apiSuccess({ req, res, data: pet, message: 'Added New Pet' });
   } catch (err) {

@@ -1,3 +1,4 @@
+import Layout from '../Layout/Layout'
 import { useForm, Controller } from 'react-hook-form'
 import { Pet, User } from '../../../interfaces'
 import { localStorageUtils } from '../../utils'
@@ -5,29 +6,26 @@ import { localStorageUtils } from '../../utils'
 import { useMutation } from 'react-query'
 import { petService } from '../../services'
 
-import Layout from '../Layout/Layout'
+import { useState } from 'react'
 
 export const AddPet = () => {
 
+  const [image, setImage] = useState<any>(null);
   const { control, handleSubmit } = useForm<Pet>()
 
   const onSubmit = ({
     name,
     age,
     breed,
-    images
   }: {
     name: string,
     age: string,
     breed: string,
-    images: string
   }) => {
     const user = localStorageUtils.getItem('user') as { user: User };
     const onAdoptionByUser = user?.user?.id;
-    console.log({ name, age, breed, onAdoptionByUser, images })
-    addPet({ name, age, breed, onAdoptionByUser, images })
+    addPet({ name, age, breed, onAdoptionByUser, image: image })
   }
-
 
   const { mutate: addPet, isLoading } = useMutation({
     mutationFn: petService.addPet,
@@ -36,6 +34,10 @@ export const AddPet = () => {
     }
   })
 
+  const handleInputImage = (e:React.ChangeEvent<HTMLInputElement>) => {
+    // console.log('ping at hendleInputChange')
+    setImage(e.target.files[0])
+  }
 
   return (
     <Layout>
@@ -74,12 +76,7 @@ export const AddPet = () => {
 
             <div>
               <div>Image:</div>
-              <Controller
-                name='images'
-                control={control}
-                render={({ field }) => <input {...field} type='file' />}
-              />
-
+              <input onChange={handleInputImage} type="file" />
             </div>
 
             <input type={isLoading ? "button" : "submit"} value={isLoading ? "Adding" : "Add Pet"} />
