@@ -3,14 +3,14 @@ import { useForm, Controller } from 'react-hook-form'
 import { Pet, User } from '../../../interfaces'
 import { localStorageUtils } from '../../utils'
 
+import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { petService } from '../../services'
-
-import { useState } from 'react'
+import { FormContainer, Form } from '../../components/styled-component'
 
 export const AddPet = () => {
 
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<File | FileList | null>(null);
   const { control, handleSubmit } = useForm<Pet>()
 
   const onSubmit = ({
@@ -34,54 +34,59 @@ export const AddPet = () => {
     }
   })
 
-  const handleInputImage = (e:React.ChangeEvent<HTMLInputElement>) => {
-    // console.log('ping at hendleInputChange')
-    setImage(e.target.files[0])
+  const handleInputImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImage(e.target.files[0])
+    }
   }
 
   return (
     <Layout>
       <div>
         <div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <div>Name</div>
-              <Controller
-                name='name'
-                control={control}
-                defaultValue=''
-                render={({ field }) => <input {...field} />}
-              />
-            </div>
+          <FormContainer>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+              <div>
+                <div>Name</div>
+                <Controller
+                  name='name'
+                  control={control}
+                  defaultValue=''
+                  render={({ field }) => <input {...field} />}
+                />
+              </div>
 
-            <div>
-              <div>Breed</div>
-              <Controller
-                name='breed'
-                control={control}
-                defaultValue=''
-                render={({ field }) => <input {...field} />}
-              />
-            </div>
+              <div>
+                <div>Breed</div>
+                <Controller
+                  name='breed'
+                  control={control}
+                  defaultValue=''
+                  render={({ field }) => <input {...field} />}
+                />
+              </div>
 
-            <div>
-              <div>Age</div>
-              <Controller
-                name='age'
-                control={control}
-                defaultValue=''
-                render={({ field }) => <input {...field} />}
-              />
-            </div>
+              <div>
+                <div>Age</div>
+                <Controller
+                  name='age'
+                  control={control}
+                  defaultValue=''
+                  render={({ field }) => <input {...field} />}
+                />
+              </div>
 
-            <div>
-              <div>Image:</div>
-              <input onChange={handleInputImage} type="file" />
-            </div>
+              <div>
+                <div>Image:</div>
+                <input onChange={handleInputImage} type="file" />
+              </div>
 
-            <input type={isLoading ? "button" : "submit"} value={isLoading ? "Adding" : "Add Pet"} />
+              <input type={isLoading ? "button" : "submit"} value={isLoading ? "Adding" : "Add Pet"} />
 
-          </form>
+              {/* </form> */}
+            </Form>
+          </FormContainer>
         </div>
       </div>
     </Layout>

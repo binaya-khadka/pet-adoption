@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div style={{ ...styles.container }}>
+      <div style={{ ...styles.container, fontFamily: 'Inter' }}>
         <div>
           <H1>
             PETS

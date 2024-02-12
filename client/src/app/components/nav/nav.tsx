@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive'
 import * as styles from './nav.styles'
 
 import { Hamburger } from './styled-component/Hamburger'
+// import { getCurrentUser } from '../../store'
 
 export const Nav = () => {
 
@@ -18,11 +19,12 @@ export const Nav = () => {
 
   useEffect(() => {
     setIsMobile(mobile)
+    // const currentUser = getCurrentUser();
   }, [mobile])
 
   return (
     <div style={styles.nav}>
-      <div style={{ ...styles.inner, height: isMobile ? 40 : 60, display: 'grid' }}>
+      <div style={{ ...styles.inner, height: isMobile ? 80 : 60, display: 'grid' }}>
         <div style={styles.logoContainer}>
           <a style={styles.logoTitle} href="/">Pet Adoption</a>
         </div>
@@ -41,10 +43,10 @@ export const Nav = () => {
         </div>
       </div>
       <div style={{ ...styles.navLinks, display: showMenu ? 'grid' : 'none' }}>
-        <a href="" style={styles.navLink} >Home</a>
-        <a href="" style={styles.navLink}>About</a>
-        <a href="" style={styles.navLink}>Login</a>
-        <a href="" style={styles.navLink}>Signup</a>
+        <a href="/" style={styles.navLink} >Home</a>
+        <a href="/about" style={styles.navLink}>About</a>
+        <a href="/login" style={styles.navLink}>Login</a>
+        <a href="/signup" style={styles.navLink}>Signup</a>
       </div>
     </div>
   )

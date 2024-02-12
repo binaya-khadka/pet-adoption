@@ -6,11 +6,12 @@ const container = {
 }
 
 const imageContainer = {
-  height: '200px',
-  width: '200px',
+  height: '250px',
+  width: '220px',
   position: 'relative' as const,
   marginLeft: 'auto',
   marginRight: 'auto',
+  marginBottom: '20px',
 }
 
 const img = {
