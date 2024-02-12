@@ -26,21 +26,20 @@ export default function Home() {
               </div>
             </> : <>
               <PetContainer>
-                {data?.data?.map(pet => (
+                { data && data?.data?.map(pet => (
                   <Pet key={pet.id}>
-                    <div style={{height: 200, width: 200}}>
+                    <div style={styles.imageContainer}>
                       <img style={{
-                        height: 200,
-                        width: '100%'
+                        ...styles.img
                       }} src={`http://localhost:3000/uploads/${pet.image}`} alt={pet.name} />
                     </div>
-                    <div>
+                    <div style={styles.petName}>
                       {pet.name}
                     </div>
-                    <div>
+                    <div style={styles.petAge}>
                       {pet.age}
                     </div>
-                    <div>
+                    <div style={styles.petBreed}>
                       {pet.breed}
                     </div>
                   </Pet>
@@ -71,4 +70,5 @@ const Pet = styled.div`
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   // margin-bottom: 10px;
   border-radius: 5px;
+  width: 400px;
 `
