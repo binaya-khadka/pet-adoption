@@ -8,6 +8,7 @@ import { useMutation } from 'react-query'
 import { petService } from '../../services'
 import { FormContainer, Form } from '../../components/styled-component'
 import { getCurrentUser } from '../../store'
+import { storageConstants } from '../../../constants'
 
 export const AddPet = () => {
 
@@ -18,6 +19,10 @@ export const AddPet = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   const [fetchedUser, setFetchedUser] = useState<boolean>(false);
+
+  interface PetAPIErrorResponse {
+    message: string;
+  }
 
   useEffect(() => {
     const fetchingUser = getCurrentUser();
@@ -40,8 +45,10 @@ export const AddPet = () => {
     age: string,
     breed: string,
   }) => {
-    const user = localStorageUtils.getItem('user') as { user: User };
-    const onAdoptionByUser = user?.user?.id;
+    const user = localStorageUtils.getItem(storageConstants.localUserKey);
+    const userObj = JSON.parse(user);
+    const userId = userObj?.user?.id;
+    const onAdoptionByUser = userId;
     addPet({ name, age, breed, onAdoptionByUser, image: image })
   }
 
@@ -49,6 +56,9 @@ export const AddPet = () => {
     mutationFn: petService.addPet,
     onSuccess: () => {
       alert("Added")
+    },
+    onError: (err: PetAPIErrorResponse) => {
+      alert(err?.message)
     }
   })
 

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios'
 import { config } from '../appConfig'
 import { clearLocalStorage, getItemFromLocalStorage } from './localStorage'
+import { storageConstants } from '../../constants'
 
 const API: AxiosInstance = axios.create({
   baseURL: config.apiUrl,
@@ -11,7 +12,7 @@ const API: AxiosInstance = axios.create({
 
 API.interceptors.request.use(
   async (axiosConfig) => {
-    const token = await getItemFromLocalStorage('token')
+    const token = await getItemFromLocalStorage(storageConstants.sessionKey)
     if (token && axiosConfig.headers) {
       axiosConfig.headers.Authorization = `Bearer ${token}`
     }
