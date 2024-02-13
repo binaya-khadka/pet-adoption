@@ -3,10 +3,9 @@ import * as styles from './home.styles'
 import { useQuery } from 'react-query'
 import { petService } from '../../services'
 import styled from 'styled-components'
-import { Link } from "react-router-dom";
 
 export default function Home() {
-
+  
   const { data, isLoading, isError } = useQuery('home', petService.getAllPets);
 
   return (
@@ -27,25 +26,23 @@ export default function Home() {
               </div>
             </> : <>
               <PetContainer>
-                {data && data?.data?.map(pet => (
-                  // <Link style={{ textDecoration: 'none' }} to={"/addpet"}>
-                    <Pet key={pet.id}>
-                      <div style={styles.imageContainer}>
-                        <img style={{
-                          ...styles.img
-                        }} src={`http://localhost:3000/uploads/${pet.image}`} alt={pet.name} />
-                      </div>
-                      <div style={styles.petName}>
-                        {pet.name}
-                      </div>
-                      <div style={styles.petAge}>
-                        {pet.age}
-                      </div>
-                      <div style={styles.petBreed}>
-                        {pet.breed}
-                      </div>
-                    </Pet>
-                  // </Link>
+                { data && data?.data?.map(pet => (
+                  <Pet key={pet.id}>
+                    <div style={styles.imageContainer}>
+                      <img style={{
+                        ...styles.img
+                      }} src={`http://localhost:3000/uploads/${pet.image}`} alt={pet.name} />
+                    </div>
+                    <div style={styles.petName}>
+                      {pet.name}
+                    </div>
+                    <div style={styles.petAge}>
+                      {pet.age}
+                    </div>
+                    <div style={styles.petBreed}>
+                      {pet.breed}
+                    </div>
+                  </Pet>
                 ))}
               </PetContainer>
             </>
