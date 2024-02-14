@@ -1,5 +1,5 @@
 interface Pet {
-  id: string;
+  _id: string;
   name: string;
   age: string;
   breed: string;

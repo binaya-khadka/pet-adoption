@@ -58,16 +58,15 @@ async function updatePetHandler(req, res) {
 
 async function adoptPetHandler(req, res) {
   try {
-
-    const { id } = req.params;
+    const { id } = req.params; // pet id
     const { adoptedByUser } = req.body;
 
-    const payload = { id, adoptedByUser };
+    const payload = { id, adoptedByUser: adoptedByUser };
 
     const pet = await petRepository.getPet(id);
 
     if (pet.isAdopted) {
-      return apiMethodUtils.apiFail({ req, res, message: 'Sorry pet has already been adopted' })
+      return apiMethodUtils.apiFail({ req, res, message: 'Sorry pet has already been adopted', error: { message: 'Pet has already been adopted' } });
     }
 
     const adoptpet = await petRepository.petAdoption(payload);
@@ -79,7 +78,7 @@ async function adoptPetHandler(req, res) {
   }
 }
 
-async function fetchSinglePet() {
+async function fetchSinglePet(req, res) {
   try {
     const { id } = req.params;
     const pet = await petRepository.getPet(id);

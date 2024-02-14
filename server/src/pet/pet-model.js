@@ -21,11 +21,13 @@ const pet = new mongoose.Schema({
     default: false
   },
   onAdoptionByUser: {
-    type: String,
-    require: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   adoptedByUser: {
-    type: String,
+    // type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   createdAt: {
     type: Date,

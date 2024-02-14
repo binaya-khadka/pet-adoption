@@ -26,7 +26,7 @@ const deletePet = async (id) => {
 }
 
 const getPet = async (id) => {
-  return await Pet.findById(id);
+  return await Pet.findById(id).populate('onAdoptionByUser', 'name email').populate('adoptedByUser', 'name email');
 }
 
 async function getPetByUser(userId) {
