@@ -1,5 +1,5 @@
 import { MutationFunction } from "react-query";
-import { User, ISignup, ILogin } from "../../interfaces";
+import { User, ISignup, ILogin } from "@/interfaces";
 import { API } from "../lib";
 
 const signUpUser: MutationFunction<{

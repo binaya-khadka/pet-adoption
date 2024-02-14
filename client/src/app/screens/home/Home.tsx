@@ -1,7 +1,7 @@
 import Layout from "../Layout/Layout";
 import * as styles from './home.styles'
 import { useQuery } from 'react-query'
-import { petService } from '../../services'
+import { petService } from '@/app/services'
 import styled from 'styled-components'
 import { Link } from "react-router-dom";
 

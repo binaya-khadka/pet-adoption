@@ -1,15 +1,15 @@
 import "./login.css"
-import Layout from "../../Layout/Layout"
+import Layout from "@/app/screens/Layout/Layout"
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
-import { userValidationSchema } from "../../../../validationSchemas"
+import { userValidationSchema } from "@/validationSchemas"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from "react-query"
-import { userService } from "../../../services"
-import { localStorageUtils } from "../../../utils"
+import { userService } from "@/app/services"
+import { localStorageUtils } from "@/app/utils"
 import { useNavigate } from "react-router-dom"
-import { storageConstants } from "../../../../constants"
-import { ErrorResponse } from "../../../../interfaces"
+import { storageConstants } from "@/constants"
+import { ErrorResponse } from "@/interfaces"
 
 type ILoginDTO = z.infer<typeof userValidationSchema.login>;
 

@@ -1,14 +1,13 @@
 import Layout from '../Layout/Layout'
 import { useForm, Controller } from 'react-hook-form'
-import { Pet, User } from '../../../interfaces'
-import { localStorageUtils } from '../../utils'
-
+import { Pet, User } from '@/interfaces'
+import { localStorageUtils } from '@/app/utils'
 import { useState, useEffect } from 'react'
 import { useMutation } from 'react-query'
-import { petService } from '../../services'
-import { FormContainer, Form } from '../../components/styled-component'
-import { getCurrentUser } from '../../store'
-import { storageConstants } from '../../../constants'
+import { petService } from '@/app/services'
+import { FormContainer, Form } from '@/app/components/styled-component'
+import { getCurrentUser } from '@/app/store'
+import { storageConstants } from '@/constants'
 
 export const AddPet = () => {
 
@@ -26,15 +25,11 @@ export const AddPet = () => {
 
   useEffect(() => {
     const fetchingUser = getCurrentUser();
-
     if (fetchingUser) {
       setCurrentUser(fetchingUser?.user);
     }
-
     setFetchedUser(true);
-
   }, [])
-
 
   const onSubmit = ({
     name,
@@ -71,8 +66,6 @@ export const AddPet = () => {
   return (
     <Layout>
       <div>
-        {/* <div> */}
-
         {fetchedUser && currentUser?.id ? (<>
           <FormContainer>
             <Form onSubmit={handleSubmit(onSubmit)}>
@@ -125,8 +118,8 @@ export const AddPet = () => {
                 </h1>
               </div>
               <div className="hero-content">
-                <div className="hero-subtitle" style={{padding: '0 12px'}}>
-                  <div style={{ margin: 'auto auto 20px' }}>  
+                <div className="hero-subtitle" style={{ padding: '0 12px' }}>
+                  <div style={{ margin: 'auto auto 20px' }}>
                     You can go to login page by clicking the Login Button
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
