@@ -2,12 +2,12 @@ import Layout from "../../Layout/Layout"
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { userValidationSchema } from '@/validationSchemas'
+import { userValidationSchema } from '../../../../validationSchemas'
 import { useMutation } from 'react-query'
-import { userService } from '@/app/services'
-import { localStorageUtils } from '@/app/utils'
+import { userService } from '../../../services'
+import { localStorageUtils } from '../../../utils'
 import { useNavigate } from 'react-router-dom'
-import { storageConstants } from "@/constants"
+import { storageConstants } from "../../../../constants"
 
 type ISignupDTO = z.infer<typeof userValidationSchema.signup>;
 

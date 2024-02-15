@@ -1,13 +1,13 @@
 import Layout from '../Layout/Layout'
 import { useForm, Controller } from 'react-hook-form'
-import { Pet, User } from '@/interfaces'
-import { localStorageUtils } from '@/app/utils'
+import { Pet, User } from '../../../interfaces'
+import { localStorageUtils } from '../../utils'
 import { useState, useEffect } from 'react'
 import { useMutation } from 'react-query'
-import { petService } from '@/app/services'
-import { FormContainer, Form } from '@/app/components/styled-component'
-import { getCurrentUser } from '@/app/store'
-import { storageConstants } from '@/constants'
+import { petService } from '../../services'
+import { FormContainer, Form } from '../../components/styled-component'
+import { getCurrentUser } from '../../store'
+import { storageConstants } from '../../../constants'
 
 export const AddPet = () => {
 

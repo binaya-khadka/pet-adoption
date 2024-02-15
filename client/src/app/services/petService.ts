@@ -1,5 +1,5 @@
 import { MutationFunction, QueryFunction } from "react-query";
-import { Pet } from "@/interfaces";
+import { Pet } from "../../interfaces";
 import { API } from "../lib";
 import endpoints from './end-points'
 

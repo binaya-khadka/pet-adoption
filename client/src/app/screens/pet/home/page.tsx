@@ -6,6 +6,7 @@ import { petService } from "../../../services";
 import { useState, useEffect } from "react";
 import { getCurrentUser } from "../../../store";
 import type { User } from "../../../../interfaces";
+import styled from "styled-components";
 
 export default function Pet() {
 
@@ -41,62 +42,173 @@ export default function Pet() {
 
   return (
     <Layout>
-      <div style={{}}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', overflow: 'hidden' }} className="hero">
-          <h1 className={styles.heroTitle}>Details</h1>
+      <Section>
+        <SectionInner>
+          <HeroTitle>Details</HeroTitle>
           {
             isLoading ? <>
-              <div>
+              <LoadingScreen>
                 Loading...
-              </div>
+              </LoadingScreen>
             </> : (
-              <div className={styles.section}>
-                <div className={styles.sectionInner}>
-                  <div className={styles.sectionHeader}>
-                    <h2 className={styles.sectionTitle}>{data?.data?.name}</h2>
-                    <p className={styles.sectionDescription}>
-                      {data?.data?.isAdopted ? 'The Pet has adopted' : 'The pet is available for adoption'}
-                    </p>
-                  </div>
-                  <div className={styles.sectionContent}>
-                    <div className={styles.imageContainer}>
-                      <img src={`http://localhost:3000/uploads/${data?.data?.image}`} alt="" className={styles.img} />
-                    </div>
-                    <p>
-                      Name - {data?.data?.name}
-                    </p>
-                    <p>
-                      Age - {data?.data?.age}
-                    </p>
-                    <p>
-                      Breed - {data?.data?.breed}
-                    </p>
-                    <div>
-                      On Adoption By - {data?.data?.onAdoptionByUser?.name}
-                    </div>
-                    <div>
-                      EMAIL - {data?.data?.onAdoptionByUser?.email}
-                    </div>
+              <>
+                <PetTitle>{data?.data?.name}</PetTitle>
+                <AdoptedPetDescription>
+                  {data?.data?.isAdopted ? 'The Pet has been adopted' : 'The pet is available for adoption'}
+                </AdoptedPetDescription>
+                <ImageContainer>
+                  <Image src={`http://localhost:3000/uploads/${data?.data?.image}`} alt={data?.data?.name}></Image>
+                </ImageContainer>
+                <PetDescription>
+                  <PetDetails>
+                    <Span>Name</Span> : {data?.data?.name}
+                  </PetDetails>
+                  <PetDetails>
+                    <Span>Age</Span> : {data?.data?.age}
+                  </PetDetails>
+                  <PetDetails>
+                    <Span>Breed</Span> : {data?.data?.breed}
+                  </PetDetails>
+                  <PetDetails>
+                    <Span>On Adoption By</Span> : {data?.data?.onAdoptionByUser?.name}
+                  </PetDetails>
 
-                    {data?.data?.isAdopted ?
-                      <>
-                        <div>The Pet has been adopted by <b> {data?.data?.adoptedByUser?.name} </b> and his email is <b>{data?.data?.adoptedByUser?.email} </b></div>
-                        {/* <div>{data?.data?.adoptedByUser?.name}</div> */}
-                      </>
-                      :
-                      <>
-                        <button onClick={adoptFn} style={{ padding: '10px 20px', outline: 'none', border: 'none', background: '#dadada', borderRadius: '5px', cursor: 'pointer' }}>
-                          {isAdopting ? "Adopting" : "Adopt"}
-                        </button>
-                      </>}
-                  </div>
-                </div>
-              </div>
+                  <PetDetails>
+                    <Span>Email</Span> : {data?.data?.onAdoptionByUser?.email}
+                  </PetDetails>
+
+                </PetDescription>
+
+                {data?.data?.isAdopted ?
+                  <>
+                    <AdoptedPetDescription>
+                      Sorry Not Aavailable for adoption.
+                      The Pet has been already adopted by <b> {data?.data?.adoptedByUser?.name} </b> and his email is <b>{data?.data?.adoptedByUser?.email} </b>
+                    </AdoptedPetDescription>
+                  </>
+                  :
+                  <>
+                    {(currentUser && currentUser?.id) ? <>
+                      <Button onClick={adoptFn}>
+                        {isAdopting ? "Adopting" : "Adopt"}
+                      </Button>
+                    </> : <>
+                      <AdoptedPetDescription>
+                        You've to login first to adopt the pet
+                      </AdoptedPetDescription>
+                    </>}
+                  </>}
+              </>
             )
           }
-
-        </div>
-      </div>
+        </SectionInner>
+      </Section>
     </Layout>
   )
 }
+
+const Section = styled.div`
+  margin-bottom: 100px;
+  font-family: 'Inter';
+`
+
+const SectionInner = styled.div`
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 15px;
+`
+
+const HeroTitle = styled.h1`
+  background-image: linear-gradient(60deg, rgb(255, 108, 108), #ffb03a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+`
+
+const LoadingScreen = styled.div`
+  height: 80vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: 2rem;
+  font-weight: 500;
+`
+
+const PetTitle = styled.h1`
+  font-size: 1.225rem;
+  font-weight: 600;
+`
+
+const AdoptedPetDescription = styled.p`
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #6b6b6b;
+  line-height: 1.6rem;
+`
+
+const ImageContainer = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+
+`
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  border-radius: 5px;
+  margin-top: 20px;
+`
+
+const PetDescription = styled.div`
+  font-weight: 500;
+  margin-top: 10px;
+  color: #6b6b6b;
+  margin-bottom: 20px;
+`
+
+const PetDetails = styled.div`
+  // align-items: center;
+  // font-weight: 500;
+  // margin-top: 10px;
+  // color: #6b6b6b;
+  // margin-bottom: 20px;
+  // display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
+
+`
+
+const Span = styled.p`
+  color: tomato;
+  font-weight: 600;  
+`
+
+const Button = styled.button`
+  padding: 12px 28px;
+  outline: none;
+  border: none;
+  background: #dadada;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  // margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  transition: all 0.3s ease;
+  &:hover {
+    background: #ffb03a;
+    color: white;
+  }
+`
