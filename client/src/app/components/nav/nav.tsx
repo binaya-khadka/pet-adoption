@@ -1,4 +1,3 @@
-// import { useState, useEffect, MouseEventHandler } from 'react'
 import { useState, useEffect } from 'react'
 import { getCurrentUser } from '../../store'
 import { User } from '../../../interfaces'
@@ -31,6 +30,10 @@ export const Nav = () => {
     setUserFetched(true)
   }, [])
 
+  const onClickLink = () => {
+    setShowMenu(false);
+  }
+
   return (
     <>
       <Navigation>
@@ -48,16 +51,16 @@ export const Nav = () => {
             </Burger>
 
             <NavLinks showMenu={showMenu}>
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/about">About</NavLink>
+              <NavLink onClick={onClickLink} href="/">Home</NavLink>
+              <NavLink onClick={onClickLink} href="/about">About</NavLink>
               {
                 userFetched ? <>
                   {currentUser?.id ? <>
-                    <NavLink href="/addpet">Add Pet</NavLink>
+                    <NavLink onClick={onClickLink} href="/addpet">Add Pet</NavLink>
                     <NavLink onClick={logoutUser}>Logout</NavLink>
                   </> : <>
-                    <NavLink href="/login">Login</NavLink>
-                    <NavLink href="/signup">Signup</NavLink>
+                    <NavLink onClick={onClickLink} href="/login">Login</NavLink>
+                    <NavLink onClick={onClickLink} href="/signup">Signup</NavLink>
                   </>}
                 </> : null
               }
