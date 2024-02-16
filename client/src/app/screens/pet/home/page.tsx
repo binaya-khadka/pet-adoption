@@ -1,5 +1,4 @@
 import Layout from "../../Layout/Layout";
-import styles from './home.module.css'
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "react-query";
 import { petService } from "../../../services";

@@ -11,49 +11,51 @@ export default function Home() {
 
   return (
     <Layout>
-      <div style={{ ...styles.container, fontFamily: 'Inter' }}>
-        <div>
-          <H1>
-            PETS
-          </H1>
-          {isLoading ? <>
+      <Section>
+        <SectionInner>
             <div>
-              Loading...
+              <H1>
+                PETS
+              </H1>
+              {isLoading ? <>
+                <div>
+                  Loading...
+                </div>
+              </> : (
+                isError ? <>
+                  <div>
+                    Some error occurred
+                  </div>
+                </> : <>
+                  <PetContainer>
+                    {data && data?.data?.map(pet => (
+                      <Pet key={pet._id}>
+                        <div>
+                          <Link to={`/pet/${pet?._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <div style={styles.imageContainer}>
+                              <img style={{
+                                ...styles.img
+                              }} src={`http://localhost:3000/uploads/${pet.image}`} alt={pet.name} />
+                            </div>
+                            <div style={styles.petName}>
+                              {pet.name}
+                            </div>
+                            <div style={styles.petAge}>
+                              Age - {pet.age}
+                            </div>
+                            <div style={styles.petBreed}>
+                              {pet.breed}
+                            </div>
+                          </Link>
+                        </div>
+                      </Pet>
+                    ))}
+                  </PetContainer>
+                </>
+              )}
             </div>
-          </> : (
-            isError ? <>
-              <div>
-                Some error occurred
-              </div>
-            </> : <>
-              <PetContainer>
-                {data && data?.data?.map(pet => (
-                  <Pet key={pet._id}>
-                    <div>
-                      <Link to={`/pet/${pet?._id}`} style={{textDecoration: 'none', color: 'inherit'}}>
-                        <div style={styles.imageContainer}>
-                          <img style={{
-                            ...styles.img
-                          }} src={`http://localhost:3000/uploads/${pet.image}`} alt={pet.name} />
-                        </div>
-                        <div style={styles.petName}>
-                          {pet.name}
-                        </div>
-                        <div style={styles.petAge}>
-                          Age - {pet.age}
-                        </div>
-                        <div style={styles.petBreed}>
-                          {pet.breed}
-                        </div>
-                      </Link>
-                    </div>
-                  </Pet>
-                ))}
-              </PetContainer>
-            </>
-          )}
-        </div>
-      </div>
+        </SectionInner>
+      </Section>
     </Layout>
   )
 }
@@ -76,4 +78,14 @@ const Pet = styled.div`
   // margin-bottom: 10px;
   border-radius: 5px;
   width: 400px;
+`
+
+const Section = styled.div`
+  font-family: 'Inter', sans-serif;
+`
+
+const SectionInner = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 15px;
 `

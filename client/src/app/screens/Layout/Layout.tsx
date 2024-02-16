@@ -3,7 +3,7 @@ import { Nav } from "../../components"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
+    <div style={{ background: '##E1F0DA' }}>
       <header>
         <Nav />
       </header>
