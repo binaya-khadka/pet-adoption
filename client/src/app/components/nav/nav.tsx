@@ -45,9 +45,9 @@ export const Nav = () => {
             </NavLogo>
 
             <Burger onClick={() => { setShowMenu(!showMenu) }}>
-              <BurgerLine />
-              <BurgerLine />
-              <BurgerLine />
+              <BurgerLine showMenu={showMenu} />
+              <BurgerLine showMenu={showMenu} />
+              <BurgerLine showMenu={showMenu} />
             </Burger>
 
             <NavLinks showMenu={showMenu}>
@@ -106,16 +106,32 @@ const NavLink = styled.a`
 
 const Burger = styled.div`
   display: block;
+  cursor: pointer;
   @media(min-width: 768px) {
     display: none;
   }
+
 `
 
-const BurgerLine = styled.div`
+const BurgerLine = styled.div<{showMenu: boolean}>`
   width: 24px;
   height: 2px;
   margin: 5px 0;
   background-color: var(--white-color);
+
+  transition: all 0.3s ease;
+
+  &:first-child {
+    transform: ${props => props.showMenu ? 'rotate(45deg) translate(5px, 5px)' : 'none'};
+  }
+
+  &:nth-child(2) {
+    opacity: ${props => props.showMenu ? 0 : 1};
+  }
+
+  &:last-child {
+    transform: ${props => props.showMenu ? 'rotate(-45deg) translate(6px, -5px)' : 'none'};
+  }
 `
 
 const NavLinks = styled.ul<{showMenu: boolean}>`
