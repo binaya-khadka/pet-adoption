@@ -1,5 +1,5 @@
 ---
-title: 'PET Adoption - work of MERN Stack'
+title: 'PET ADOPTION USING MERN STACK'
 ---
 
 # PET Adoption
@@ -16,8 +16,21 @@ And the user should be able to see who adopted the pet.
 - Express
 - React
 - Node.js
-- React Hook Form
-- zod
-- Typescript (client side)
-- React query
-- React Router form
+
+## How to run this?
+
+First by going inside server folder nad then running the command
+
+```bash
+npm run dev
+```
+in both oustide and inside door of the server folder.
+
+Then by going inside client folder and then running the command 
+```bash
+npm run dev
+```
+
+## And for database use the following jasascript code
+
+
