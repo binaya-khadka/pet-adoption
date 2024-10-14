@@ -1,0 +1,1 @@
+so just create public/uploads folder in server folder for storing images
