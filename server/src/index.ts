@@ -2,8 +2,8 @@ import express, { Request, Response } from 'express'
 import config from './config';
 // import { userRouter } from './user/index.js'
 // import { petRouter } from './pet/index.js';
-// import db from './lib/db.js'
 import cors from 'cors'
+import { connectDB } from './lib';
 
 const app = express();
 app.use(cors());
@@ -18,6 +18,8 @@ app.use(express.static('public'))
 // app.use('/pet', petRouter);
 
 app.listen(port, () => {
-  // db();
+  connectDB().then(() => {
+    console.log('Connected to MongoDB');
+  });
   console.log(`Server has started at http://localhost:${port}`)
 })
