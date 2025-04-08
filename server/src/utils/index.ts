@@ -1,3 +1,3 @@
-export * as apiMethodUtils from './apiMethod.js'
-export * as jwtUtils from './jwt.js'
-export { upload } from './upload.js'
+export * as apiMethodUtils from './apiMethod';
+export * as jwtUtils from './jwt';
+export { upload } from './upload';

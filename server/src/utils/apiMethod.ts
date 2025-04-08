@@ -1,52 +1,64 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 interface ApiResponse {
-  req: Request,
-  res: Response,
-  message?: string,
-  status: {
-    code: number,
-    success: boolean,
-  }
+  req: Request;
+  res: Response;
+  message?: string;
+  status?: {
+    code: number;
+    success: boolean;
+  };
 }
 
 interface ApiSuccess extends ApiResponse {
-  data?: any,
+  data?: any;
 }
 
 interface ApiFail extends ApiResponse {
-  error?: any,
+  error?: any;
 }
 
-const apiSuccess = ({ req, res, data, message = 'Success',
+const apiSuccess = ({
+  req,
+  res,
+  data,
+  message = 'Success',
   status = {
     code: 200,
-    success: true,
-  },
+    success: true
+  }
 }: ApiSuccess) => {
   console.log({
     message,
     method: req?.method,
-    route: req?.url,
-  })
-  return res.status(status.code || 200).json({ message, status, data })
-}
+    route: req?.url
+  });
+  return res.status(status?.code || 200).json({ message, status, data });
+};
 
-const apiFail = ({ req, res, error, message = 'Error Occurred',
+const apiFail = ({
+  req,
+  res,
+  error,
+  message = 'Error Occurred',
   status = {
     code: 400,
-    success: false,
-  },
+    success: false
+  }
 }: ApiFail) => {
-  console.log(error);
+  console.log({
+    message,
+    method: req?.method,
+    route: req?.url
+  });
   return res.status(status.code || 400).json({
     message,
     status: {
       code: status.code || 400,
-      success: status.success || false,
+      success: status.success || false
     },
-    error,
-  })
-}
+    error
+  });
+};
 
-export { apiSuccess, apiFail }
+export { apiSuccess, apiFail };
