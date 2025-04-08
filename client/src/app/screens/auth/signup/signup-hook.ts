@@ -10,7 +10,7 @@ import { storageConstants } from '../../../../constants';
 
 type ISignupDTO = z.infer<typeof userValidationSchema.signup>;
 
-export default function useSingupHook() {
+export default function useSignupHook() {
   const navigate = useNavigate();
 
   const {
