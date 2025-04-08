@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { userRouter } from './user';
-// import { petRouter } from './pet/index.js';
 import cors from 'cors';
 import { connectDB, serverConfig } from './lib';
 
