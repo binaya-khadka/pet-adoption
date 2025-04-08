@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { userRouter } from './user';
 import cors from 'cors';
 import { connectDB, serverConfig } from './lib';
+import { petRouter } from './pet';
 
 const app = express();
 app.use(cors());
@@ -19,7 +20,7 @@ app.get('/ping', (req: Request, res: Response) => {
 });
 
 app.use('/user', userRouter);
-// app.use('/pet', petRouter);
+app.use('/pet', petRouter);
 
 app.listen(port, () => {
   connectDB().then(() => {

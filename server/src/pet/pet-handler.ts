@@ -1,5 +1,5 @@
 import { petRepository } from '.';
-import { apiMethodUtils } from 'src/utils';
+import { apiMethodUtils } from '../utils';
 import { Request, Response } from 'express';
 
 const addPetHandler = async (req: Request, res: Response) => {
