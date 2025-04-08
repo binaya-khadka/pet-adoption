@@ -1,15 +1,10 @@
 import Layout from '../Layout/Layout';
-import * as styles from './home.styles';
-import { useQuery } from 'react-query';
-import { petService } from '../../services';
+
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import useHome from './useHome';
 
 export default function Home() {
-  const { data, isLoading, isError } = useQuery('home', petService.getAllPets);
-
-  console.log({ data, isLoading });
-
+  const { data, isLoading, isError, Link, styles } = useHome();
   return (
     <Layout>
       <Section>
