@@ -6,7 +6,7 @@ import { verifyToken } from '../middleware';
 const petRouter = express.Router();
 
 petRouter.get('/', (req: Request, res: Response) => {
-  petHandler.fetchPets;
+  petHandler.fetchPets(req, res);
 });
 
 petRouter.post(
@@ -14,7 +14,7 @@ petRouter.post(
   upload.single('image'),
   verifyToken,
   (req: Request, res: Response) => {
-    petHandler.addPetHandler;
+    petHandler.addPetHandler(req, res);
   }
 );
 
@@ -26,12 +26,12 @@ petRouter.post(
 
 // Route for adopting a pet
 petRouter.put('/adopt/:id', verifyToken, (req: Request, res: Response) => {
-  petHandler.adoptPetHandler;
+  petHandler.adoptPetHandler(req, res);
 });
 
 // Route for fetching a single pet
 petRouter.get('/:id', (req: Request, res: Response) => {
-  petHandler.fetchSinglePet;
+  petHandler.fetchSinglePet(req, res);
 });
 
 export { petRouter };
