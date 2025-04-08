@@ -140,15 +140,6 @@ async function adoptPetHandler(req: Request, res: Response) {
       };
     }
 
-    if (pet.isAdopted) {
-      return apiMethodUtils.apiFail({
-        req,
-        res,
-        message: 'Sorry pet has already been adopted',
-        error: { message: 'Pet has already been adopted' }
-      });
-    }
-
     const adoptPet = await petRepository.petAdoption(payload);
 
     return apiMethodUtils.apiSuccess({

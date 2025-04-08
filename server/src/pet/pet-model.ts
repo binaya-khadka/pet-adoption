@@ -7,18 +7,11 @@ const PetSchema = new Schema<Pet>({
   age: { type: String, required: true },
   breed: { type: String, required: true },
   isAdopted: { type: Boolean, default: false },
-  onAdoptionByUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  adoptedByUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  onAdoptionByUser: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
+  adoptedByUser: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
   createdAt: { type: Date, default: Date.now }
 });
 
-const Pets =
-  (mongoose.models.Pets as mongoose.Model<
-    Pet,
-    Record<string, never>,
-    Record<string, never>,
-    Record<string, never>,
-    Pet
-  >) || mongoose.model<Pet>('Pets', PetSchema);
+const Pets = mongoose.models.Pets || mongoose.model<Pet>('Pets', PetSchema);
 
 export { Pets };
