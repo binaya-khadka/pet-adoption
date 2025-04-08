@@ -5,10 +5,13 @@ import { userRepository } from "src/user";
 import { apiMethodUtils } from "src/utils"
 import { serverConfig } from 'src/lib';
 
-const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
+const verifyToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const token = req.headers['authorization']?.split(' ')[1];
 
-  if (!token) return res.status(401).json({ message: 'Unauthorized' });
+  if (!token)
+    throw {
+      message: "Unauthorized",
+    }
 
   try {
     const decodedData = jwt.verify(token, serverConfig?.jwtSecret);
