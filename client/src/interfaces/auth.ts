@@ -9,7 +9,4 @@ interface ILogin {
   password: string;
 }
 
-export type {
-  ISignup,
-  ILogin
-}
+export type { ISignup, ILogin };

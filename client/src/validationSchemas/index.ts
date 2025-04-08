@@ -1,1 +1,1 @@
-export * as userValidationSchema from './user'
+export * as userValidationSchema from './user';

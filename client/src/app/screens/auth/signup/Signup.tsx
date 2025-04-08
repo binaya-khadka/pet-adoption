@@ -1,9 +1,9 @@
-import Layout from "../../Layout/Layout"
-import useSingupHook from "./signup-hook"
+import Layout from '../../Layout/Layout';
+import useSignupHook from './signup-hook';
 
 export default function Signup() {
-
-  const { handleSubmit, Controller, control, errors, onSubmit, isLoading } = useSingupHook();
+  const { handleSubmit, Controller, control, errors, onSubmit, isLoading } =
+    useSignupHook();
 
   return (
     <Layout>
@@ -16,40 +16,52 @@ export default function Signup() {
                 name="name"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <input className="textField" {...field} />}
+                render={({ field }) => (
+                  <input className="textField" {...field} />
+                )}
               />
-              {errors?.name &&
+              {errors?.name && (
                 <div style={{ color: 'tomato' }}>{errors?.name?.message}</div>
-              }
+              )}
             </div>
             <div>
               <div className="labelText">Email</div>
               <Controller
                 name="email"
                 control={control}
-                render={({ field }) => <input className="textField" {...field} />}
+                render={({ field }) => (
+                  <input className="textField" {...field} />
+                )}
               />
-              {errors?.email &&
+              {errors?.email && (
                 <div style={{ color: 'tomato' }}>{errors?.email?.message}</div>
-              }
+              )}
             </div>
             <div>
               <div className="labelText">Password</div>
               <Controller
                 name="password"
                 control={control}
-                render={({ field }) => <input className="textField" type="password" {...field} />}
+                render={({ field }) => (
+                  <input className="textField" type="password" {...field} />
+                )}
               />
-              {errors?.password &&
-                <div style={{ color: 'tomato' }}>{errors?.password?.message}</div>
-              }
+              {errors?.password && (
+                <div style={{ color: 'tomato' }}>
+                  {errors?.password?.message}
+                </div>
+              )}
             </div>
             <div>
-              <input className="button" type={isLoading ? "button" : "submit"} value={isLoading ? "Submitting" : "Submit"} />
+              <input
+                className="button"
+                type={isLoading ? 'button' : 'submit'}
+                value={isLoading ? 'Submitting' : 'Submit'}
+              />
             </div>
           </form>
         </div>
       </div>
     </Layout>
-  )
+  );
 }

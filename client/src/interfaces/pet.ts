@@ -9,6 +9,4 @@ interface Pet {
   image: string;
 }
 
-export type {
-  Pet
-}
+export type { Pet };

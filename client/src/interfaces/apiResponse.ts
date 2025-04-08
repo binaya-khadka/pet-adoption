@@ -3,10 +3,10 @@ interface ErrorResponse {
   status: {
     code: number;
     success: boolean;
-  }
+  };
   error: {
     message: string;
   };
 }
 
-export type { ErrorResponse }
+export type { ErrorResponse };

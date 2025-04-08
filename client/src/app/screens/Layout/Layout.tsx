@@ -1,5 +1,5 @@
-import React from "react"
-import { Nav } from "../../components"
+import React from 'react';
+import { Nav } from '../../components';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,9 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header>
         <Nav />
       </header>
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
     </div>
-  )
+  );
 }
