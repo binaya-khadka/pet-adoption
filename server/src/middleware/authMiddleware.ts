@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import jwt from 'jsonwebtoken'
 
-import { userRepository } from 'src/user';
+import { userRepository } from "src/user";
 import { apiMethodUtils } from "src/utils"
 import { serverConfig } from 'src/lib';
 
