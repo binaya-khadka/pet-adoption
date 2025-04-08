@@ -1,5 +1,6 @@
-import useNav from './useNav';
 import styled from 'styled-components';
+
+import useNav from './useNav';
 
 export const Nav = () => {
   const {

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { getCurrentUser } from '../../store';
 import { User } from '../../../interfaces';
 import { localStorageUtils } from '../../utils';
 import { storageConstants } from '../../../constants';
-import { useNavigate } from 'react-router-dom';
 
 export default function useNav() {
   const navigate = useNavigate();
