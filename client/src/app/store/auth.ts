@@ -1,5 +1,5 @@
-import { storageConstants } from '../../constants';
-import { getItemFromLocalStorage } from '../lib/localStorage';
+import { storageConstants } from '@/constants';
+import { getItemFromLocalStorage } from '@/app/lib/localStorage';
 
 const getCurrentUser = () => {
   return JSON.parse(

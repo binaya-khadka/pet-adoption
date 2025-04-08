@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getCurrentUser } from '../../store';
-import { User } from '../../../interfaces';
-import { localStorageUtils } from '../../utils';
-import { storageConstants } from '../../../constants';
+import { getCurrentUser } from '@/app/store';
+import { User } from '@/interfaces';
+import { localStorageUtils } from '@/app/utils';
+import { storageConstants } from '@/constants';
 
 export default function useNav() {
   const navigate = useNavigate();
@@ -24,7 +24,6 @@ export default function useNav() {
   useEffect(() => {
     const fetchedUser = getCurrentUser();
     if (fetchedUser?.user?.id) {
-      //
       setCurrentUser(fetchedUser?.user);
     }
     setUserFetched(true);

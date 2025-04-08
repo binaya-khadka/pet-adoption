@@ -1,6 +1,7 @@
 import './login.css';
-import Layout from '../../Layout/Layout';
 import useLoginHook from './useLogin';
+
+import Layout from '@/app/screens/Layout/Layout';
 
 export default function Login() {
   const {

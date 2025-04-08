@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
-import { config } from '../appConfig';
-import { clearLocalStorage, getItemFromLocalStorage } from './localStorage';
-import { storageConstants } from '../../constants';
+import { config } from '@/app/appConfig';
+import { clearLocalStorage, getItemFromLocalStorage } from '.';
+import { storageConstants } from '@/constants';
 
 const API: AxiosInstance = axios.create({
   baseURL: config.apiUrl,
@@ -28,10 +28,9 @@ API.interceptors.response.use(
   async (error: any) => {
     if (error?.response?.data?.message === 'Unauthorized User') {
       clearLocalStorage();
-      // message.error('Session expired')
       return;
     }
-    return Promise.reject(error?.response?.data || 'Error occured');
+    return Promise.reject(error?.response?.data || 'Error occurred');
   }
 );
 
