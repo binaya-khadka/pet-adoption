@@ -1,6 +1,8 @@
 import './index.css';
 import './global.css';
+
 import ReactDOM from 'react-dom/client';
+
 import { Home, Signup, Login, About, Pet } from './app/screens';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
