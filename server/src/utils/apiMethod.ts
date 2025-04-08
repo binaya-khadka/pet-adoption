@@ -32,7 +32,7 @@ const apiSuccess = ({ req, res, data, message = 'Success',
   return res.status(status.code || 200).json({ message, status, data })
 }
 
-const apiFail = ({ req, res, error, message = 'Error Occured',
+const apiFail = ({ req, res, error, message = 'Error Occurred',
   status = {
     code: 400,
     success: false,
