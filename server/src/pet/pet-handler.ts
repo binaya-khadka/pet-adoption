@@ -127,12 +127,17 @@ async function adoptPetHandler(req: Request, res: Response) {
     const { id } = req.params;
     const { adoptedByUser } = req.body;
 
-    const payload = { id, adoptedByUser };
+    const payload = { _id: id, adoptedByUser };
 
     const pet = await petRepository.getPet(id);
 
     if (!pet) {
-      throw new Error('Pet not found');
+      throw {
+        message: 'Pet not found',
+        error: {
+          message: 'Pet not found'
+        }
+      };
     }
 
     if (pet.isAdopted) {
