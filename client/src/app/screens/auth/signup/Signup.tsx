@@ -1,5 +1,5 @@
 import Layout from '../../Layout/Layout';
-import useSignupHook from './signup-hook';
+import useSignupHook from './useSignupHook';
 
 export default function Signup() {
   const { handleSubmit, Controller, control, errors, onSubmit, isLoading } =
