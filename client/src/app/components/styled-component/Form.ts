@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FormContainer = styled.div`
   display: grid;
   place-items: center;
   height: calc(100vh - 12rem);
-`
+`;
 
 export const Form = styled.form`
   padding: 3.5rem;
@@ -13,4 +13,4 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`
+`;

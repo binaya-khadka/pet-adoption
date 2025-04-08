@@ -1,3 +1,3 @@
-import Pet from './home/page'
+import Pet from './home/page';
 
-export { Pet }
+export { Pet };

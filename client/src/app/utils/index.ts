@@ -1,1 +1,1 @@
-export * as localStorageUtils from './localStorage'
+export * as localStorageUtils from './localStorage';

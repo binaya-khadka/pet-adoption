@@ -4,4 +4,4 @@ interface User {
   email: string;
 }
 
-export type { User }
+export type { User };

@@ -1,1 +1,1 @@
-export * as storageConstants from './storage'
+export * as storageConstants from './storage';
