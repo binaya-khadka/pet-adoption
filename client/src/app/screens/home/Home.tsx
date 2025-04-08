@@ -1,7 +1,7 @@
-import Layout from '../Layout/Layout';
-
 import styled from 'styled-components';
+
 import useHome from './useHome';
+import Layout from '@/app/screens/Layout/Layout';
 
 export default function Home() {
   const { data, isLoading, isError, Link, styles } = useHome();

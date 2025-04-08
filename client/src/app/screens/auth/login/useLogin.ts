@@ -1,13 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from 'react-query';
-import { userService } from '../../../services';
-import { localStorageUtils } from '../../../utils';
-import { useNavigate } from 'react-router-dom';
-import { storageConstants } from '../../../../constants';
-import { ErrorResponse } from '../../../../interfaces';
-import { useForm, Controller } from 'react-hook-form';
-import { userValidationSchema } from '../../../../validationSchemas';
 import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, Controller } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+
+import { userService } from '@/app/services';
+import { userValidationSchema } from '@/validationSchemas';
+import { storageConstants } from '@/constants';
+import { ErrorResponse } from '@/interfaces';
+import { localStorageUtils } from '@/app/utils';
 
 type ILoginDTO = z.infer<typeof userValidationSchema.login>;
 

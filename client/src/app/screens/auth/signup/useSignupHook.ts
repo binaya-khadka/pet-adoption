@@ -1,12 +1,13 @@
 import { z } from 'zod';
-import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { userValidationSchema } from '../../../../validationSchemas';
+import { useForm, Controller } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { userService } from '../../../services';
-import { localStorageUtils } from '../../../utils';
 import { useNavigate } from 'react-router-dom';
-import { storageConstants } from '../../../../constants';
+
+import { userService } from '@/app/services';
+import { storageConstants } from '@/constants';
+import { localStorageUtils } from '@/app/utils';
+import { userValidationSchema } from '@/validationSchemas';
 
 type ISignupDTO = z.infer<typeof userValidationSchema.signup>;
 

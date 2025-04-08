@@ -1,4 +1,4 @@
-import Layout from '../../Layout/Layout';
+import Layout from '@/app/screens/Layout/Layout';
 import useSignupHook from './useSignupHook';
 
 export default function Signup() {

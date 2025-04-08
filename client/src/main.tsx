@@ -1,7 +1,9 @@
 import './index.css';
 import './global.css';
+
 import ReactDOM from 'react-dom/client';
-import { Home, Signup, Login, About, Pet } from './app/screens';
+
+import { Home, Signup, Login, About, Pet } from '@/app/screens';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
 import { AddPet } from './app/screens/pet/Add';

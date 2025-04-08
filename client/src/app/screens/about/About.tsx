@@ -1,4 +1,4 @@
-import Layout from '../Layout/Layout';
+import Layout from '@/app/screens/Layout/Layout';
 
 export default function About() {
   return (

@@ -1,11 +1,12 @@
-import Layout from '../../Layout/Layout';
-import { useParams } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
-import { petService } from '../../../services';
 import { useState, useEffect } from 'react';
-import { getCurrentUser } from '../../../store';
-import type { User } from '../../../../interfaces';
+import { useQuery, useMutation } from 'react-query';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+
+import Layout from '@/app/screens/Layout/Layout';
+import { petService } from '@/app/services';
+import { getCurrentUser } from '@/app/store';
+import type { User } from '@/interfaces';
 
 export default function Pet() {
   const { id } = useParams<{ id: string }>();
