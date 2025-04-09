@@ -82,7 +82,7 @@ const NavInner = styled.div`
 const NavContent = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
-  padding: 20px 0;
+  padding: 5px 0;
   align-items: center;
 `;
 
