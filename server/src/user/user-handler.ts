@@ -3,7 +3,9 @@ import bcrypt from 'bcryptjs';
 
 import { apiMethodUtils } from '../utils';
 import { userService } from '.';
-import { httpStatus } from 'src/constants';
+import { httpStatus } from '../constants';
+import { userValidationSchema } from '../validationSchema';
+import { ZodError } from 'zod';
 
 const getAllUserHandler = async (
   req: Request,
@@ -27,6 +29,8 @@ const createUserHandler = async (req: Request, res: Response) => {
   const payload = { name, email, password: hashedPassword };
 
   try {
+    const validatedData = await userValidationSchema.signup.parse(payload);
+
     const existingUser = await userService.getUserByEmail(email);
 
     if (existingUser) {
@@ -49,6 +53,26 @@ const createUserHandler = async (req: Request, res: Response) => {
     });
   } catch (err) {
     console.log(err);
+
+    if (err instanceof ZodError) {
+      const errorMessages = err.errors.map((error) => ({
+        field: error.path[0],
+        message: error.message
+      }));
+      return apiMethodUtils.apiFail({
+        req,
+        res,
+        error: {
+          message: errorMessages,
+          status: {
+            code: httpStatus.BAD_REQUEST,
+            success: false
+          }
+        },
+        message: 'Validation Failed'
+      });
+    }
+
     return apiMethodUtils.apiFail({
       req,
       res,
@@ -61,8 +85,11 @@ const createUserHandler = async (req: Request, res: Response) => {
 const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
+  const payload = { email, password };
+
   try {
-    const user = await userService.login({ email, password });
+    const validatedData = await userValidationSchema.login.parse(payload);
+    const user = await userService.login(payload);
 
     return apiMethodUtils.apiSuccess({
       req,
@@ -72,6 +99,25 @@ const loginHandler = async (req: Request, res: Response) => {
     });
   } catch (err) {
     console.log(err);
+    if (err instanceof ZodError) {
+      const errorMessages = err.errors.map((error) => ({
+        field: error.path[0],
+        message: error.message
+      }));
+
+      return apiMethodUtils.apiFail({
+        req,
+        res,
+        error: {
+          message: errorMessages,
+          status: {
+            code: httpStatus.BAD_REQUEST,
+            success: false
+          }
+        },
+        message: 'Validation Failed'
+      });
+    }
     return apiMethodUtils.apiFail({
       req,
       res,

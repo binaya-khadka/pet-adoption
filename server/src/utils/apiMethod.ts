@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { httpStatus } from 'src/constants';
+import { httpStatus } from '../constants';
 
 interface ApiResponse {
   req: Request;
