@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 
 import { apiMethodUtils } from '../utils';
 import { userService } from '.';
+import { httpStatus } from 'src/constants';
 
 const getAllUserHandler = async (
   req: Request,
@@ -32,7 +33,7 @@ const createUserHandler = async (req: Request, res: Response) => {
       throw {
         message: 'User already exists',
         status: {
-          code: 400,
+          code: httpStatus.BAD_REQUEST,
           success: false
         }
       };
