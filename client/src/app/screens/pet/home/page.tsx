@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '@/app/screens/Layout/Layout';
 import { petService } from '@/app/services';
 import { getCurrentUser } from '@/app/store';
-import type { User } from '@/interfaces';
+import type { ErrorResponse, User } from '@/interfaces';
 
 export default function Pet() {
   const { id } = useParams<{ id: string }>();
@@ -24,8 +24,8 @@ export default function Pet() {
       onSuccess: () => {
         alert('Adopted');
       },
-      onError: (err: any) => {
-        alert(err?.response?.data?.message || 'Error');
+      onError: (err: ErrorResponse) => {
+        alert(err?.message || 'Error');
       }
     }
   );
@@ -37,7 +37,7 @@ export default function Pet() {
 
   const adoptFn = () => {
     if (currentUser && currentUser?.id) {
-      adoptPet({ _id: id, userId: currentUser?.id });
+      adoptPet({ _id: id!, userId: currentUser?.id });
     }
   };
 
@@ -87,7 +87,7 @@ export default function Pet() {
               {data?.data?.isAdopted ? (
                 <>
                   <AdoptedPetDescription>
-                    Sorry Not Aavailable for adoption. The Pet has been already
+                    Sorry Not Available for adoption. The Pet has been already
                     adopted by <b> {data?.data?.adoptedByUser?.name} </b> and
                     his email is <b>{data?.data?.adoptedByUser?.email} </b>
                   </AdoptedPetDescription>

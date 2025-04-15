@@ -10,8 +10,14 @@ interface NewPet {
   age: string;
   breed: string;
   isAdopted: string;
-  onAdoptionByUser: string;
-  adoptedByUser: string;
+  onAdoptionByUser: {
+    name: string;
+    email: string;
+  };
+  adoptedByUser?: {
+    name: string;
+    email: string;
+  };
 }
 
 interface IAdoptPet {
