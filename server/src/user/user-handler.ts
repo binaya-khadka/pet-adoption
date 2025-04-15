@@ -65,7 +65,7 @@ const createUserHandler = async (req: Request, res: Response) => {
         error: {
           message: errorMessages,
           status: {
-            code: httpStatus.BAD_REQUEST,
+            code: httpStatus.UNPROCESSABLE_ENTITY,
             success: false
           }
         },
@@ -111,7 +111,7 @@ const loginHandler = async (req: Request, res: Response) => {
         error: {
           message: errorMessages,
           status: {
-            code: httpStatus.BAD_REQUEST,
+            code: httpStatus.UNPROCESSABLE_ENTITY,
             success: false
           }
         },
