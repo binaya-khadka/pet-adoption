@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { httpStatus } from '../constants';
 
 interface ApiResponse {
   req: Request;
@@ -24,7 +25,7 @@ const apiSuccess = ({
   data,
   message = 'Success',
   status = {
-    code: 200,
+    code: httpStatus.OK,
     success: true
   }
 }: ApiSuccess) => {
@@ -33,7 +34,9 @@ const apiSuccess = ({
     method: req?.method,
     route: req?.url
   });
-  return res.status(status?.code || 200).json({ message, status, data });
+  return res
+    .status(status?.code || httpStatus.OK)
+    .json({ message, status, data });
 };
 
 const apiFail = ({
@@ -42,7 +45,7 @@ const apiFail = ({
   error,
   message = 'Error Occurred',
   status = {
-    code: 400,
+    code: httpStatus.BAD_REQUEST,
     success: false
   }
 }: ApiFail) => {
@@ -51,12 +54,9 @@ const apiFail = ({
     method: req?.method,
     route: req?.url
   });
-  return res.status(status.code || 400).json({
+  return res.status(status.code || httpStatus.BAD_REQUEST).json({
     message,
-    status: {
-      code: status.code || 400,
-      success: status.success || false
-    },
+    status,
     error
   });
 };
