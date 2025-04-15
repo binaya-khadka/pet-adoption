@@ -1,11 +1,13 @@
+import { User } from '.';
+
 interface Pet {
   _id: string;
   name: string;
   age: string;
   breed: string;
   isAdopted: boolean;
-  onAdoptionByUser: string;
-  adoptedByUser: string;
+  onAdoptionByUser: User;
+  adoptedByUser?: User;
   image: string;
 }
 
