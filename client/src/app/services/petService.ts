@@ -14,13 +14,9 @@ interface NewPet {
   adoptedByUser: string;
 }
 
-interface QueryKeyContainer {
-  queryKey: [
-    {
-      _id: string;
-      userId: string;
-    }
-  ];
+interface IAdoptPet {
+  _id: string;
+  userId: string;
 }
 
 const getAllPets: QueryFunction<{
@@ -52,9 +48,8 @@ const adoptPet: MutationFunction<
     message: string;
     data: NewPet | null;
   },
-  QueryKeyContainer
+  IAdoptPet
 > = async (_data) => {
-  console.log(_data._id, _data?.userId);
   return await API.put(`${endpoints.pet}/adopt/${_data?._id}`, {
     adoptedByUser: _data?.userId
   });
