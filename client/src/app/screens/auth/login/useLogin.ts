@@ -38,7 +38,6 @@ export default function useLoginHook() {
       navigate('/');
     },
     onError: (error: ErrorResponse) => {
-      console.log(error?.error?.message);
       alert(error?.error.message);
     }
   });

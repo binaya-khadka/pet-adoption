@@ -1,26 +1,12 @@
 import { MutationFunction, QueryFunction } from 'react-query';
-import { Pet } from '../../interfaces';
+
 import { API } from '../lib';
+import { Pet } from '../../interfaces';
 import endpoints from './end-points';
 
-interface NewPet {
+interface IAdoptPet {
   _id: string;
-  name: string;
-  image: string;
-  age: string;
-  breed: string;
-  isAdopted: string;
-  onAdoptionByUser: string;
-  adoptedByUser: string;
-}
-
-interface QueryKeyContainer {
-  queryKey: [
-    {
-      _id: string;
-      userId: string;
-    }
-  ];
+  userId: string;
 }
 
 const getAllPets: QueryFunction<{
@@ -42,7 +28,7 @@ const addPet: MutationFunction<{
 
 const fetchPet: QueryFunction<{
   message: string;
-  data: NewPet | null;
+  data: Pet | null;
 }> = async (_id) => {
   return await API.get(`${endpoints.pet}/${_id?.queryKey[1]}`);
 };
@@ -50,11 +36,10 @@ const fetchPet: QueryFunction<{
 const adoptPet: MutationFunction<
   {
     message: string;
-    data: NewPet | null;
+    data: Pet | null;
   },
-  QueryKeyContainer
+  IAdoptPet
 > = async (_data) => {
-  console.log(_data._id, _data?.userId);
   return await API.put(`${endpoints.pet}/adopt/${_data?._id}`, {
     adoptedByUser: _data?.userId
   });
