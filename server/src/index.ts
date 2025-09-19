@@ -3,11 +3,33 @@ import { userRouter } from './user';
 import cors from 'cors';
 import { connectDB, serverConfig } from './lib';
 import { petRouter } from './pet';
+import { Server } from 'socket.io';
+import { createServer } from 'http';
 
 const app = express();
 app.use(cors());
 
 const port = serverConfig?.port;
+
+const server = createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173'
+  }
+});
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('go-online', (userId: string) => {
+    console.log('USER ONLINE', userId);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +44,7 @@ app.get('/ping', (req: Request, res: Response) => {
 app.use('/user', userRouter);
 app.use('/pet', petRouter);
 
-app.listen(port, () => {
+server.listen(port, () => {
   connectDB().then(() => {
     console.log('Connected to MongoDB');
   });

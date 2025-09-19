@@ -3,8 +3,15 @@ import styled from 'styled-components';
 import useHome from './useHome';
 import Layout from '@/app/screens/Layout/Layout';
 
+import { socket } from '@/socket';
+
+socket.on('connect', () => {
+  console.log('connected', socket.id);
+});
+
 export default function Home() {
   const { data, isLoading, isError, Link, styles } = useHome();
+
   return (
     <Layout>
       <Section>
